@@ -46,7 +46,7 @@ input, button {
 /* Main content container (initially hidden) */
 .main-container {
     display: none; /* Initially hidden */
-    flex-direction: column;
+    flex-direction: row; /* Use row for side-by-side layout */
     width: 80%;
     max-width: 1000px;
     background: white;
