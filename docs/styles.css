@@ -1,0 +1,148 @@
+/* General body and container styles */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f2f5;
+}
+
+/* Chat container styles (from previous code) */
+.chat-container {
+    width: 80%;
+    max-width: 600px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-header {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 1.5em;
+}
+.chat-box {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.message {
+    padding: 10px 15px;
+    border-radius: 18px;
+    max-width: 75%;
+}
+.user-message {
+    align-self: flex-end;
+    background-color: #dcf8c6;
+}
+.bot-message {
+    align-self: flex-start;
+    background-color: #e5e5ea;
+}
+.input-area {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+#chat-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+#send-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#send-button:hover {
+    background-color: #0056b3;
+}
+
+/* Login/Developer Portal styles */
+.login-container, .developer-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background: white;
+    padding: 40px 60px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.developer-container {
+    display: none; /* Initially hidden */
+}
+h1 {
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+p {
+    color: #666;
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+input, button {
+    padding: 10px;
+    margin-top: 10px;
+}
+.log-area {
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    margin-top: 20px;
+    text-align: left;
+    height: 200px;
+    overflow-y: scroll;
+}
+
+/* The new floating developer button */
+.developer-button {
+    position: fixed;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: #007bff;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+.developer-button:hover {
+    width: 200px;
+    border-radius: 30px;
+}
+.developer-button img {
+    filter: invert(100%);
+}
+.developer-button .tooltip {
+    display: none;
+    color: white;
+    font-size: 1em;
+    white-space: nowrap;
+    margin-left: 10px;
+}
+.developer-button:hover .tooltip {
+    display: inline;
+}
