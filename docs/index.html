@@ -3,53 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FloatChat - Welcome</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f2f5;
-        }
-        .welcome-container {
-            text-align: center;
-            background: white;
-            padding: 40px 60px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #333;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-        p {
-            color: #666;
-            font-size: 1.2em;
-            margin-bottom: 30px;
-        }
-        .start-button {
-            background-color: #007bff;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        .start-button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <title>FloatChat - Chat Interface</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="welcome-container">
-        <h1>Welcome to FloatChat</h1>
-        <p>Your interactive guide to ocean data. Ask me about temperature, salinity, and more!</p>
-        <a href="chat.html" class="start-button">Start Chatting</a>
+    <div class="chat-container">
+        <div class="chat-header">FloatChat</div>
+        <div class="chat-box" id="chat-box">
+            <div class="message bot-message">Hello! I'm FloatChat. Ask me about the day's ocean data.</div>
+        </div>
+        <div class="input-area">
+            <input type="text" id="chat-input" placeholder="Ask a question...">
+            <button id="send-button">Send</button>
+        </div>
     </div>
+
+    <a href="developer.html" target="_blank" class="developer-button">
+        <span class="tooltip">Developer Portal</span>
+        <img src="https://www.flaticon.com/svg/static/icons/svg/25/25284.svg" alt="Developer" width="30">
+    </a>
+    
+    <script>
+        const chatInput = document.getElementById('chat-input');
+        const sendButton = document.getElementById('send-button');
+        const chatBox = document.getElementById('chat-box');
+
+        sendButton.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        async function sendMessage() {
+            const userMessage = chatInput.value.trim();
+            if (userMessage === '') return;
+
+            // Display user message
+            const userMessageDiv = document.createElement('div');
+            userMessageDiv.className = 'message user-message';
+            userMessageDiv.textContent = userMessage;
+            chatBox.appendChild(userMessageDiv);
+            chatInput.value = '';
+
+            // Display a loading message from the bot
+            const loadingMessageDiv = document.createElement('div');
+            loadingMessageDiv.className = 'message bot-message';
+            loadingMessageDiv.textContent = 'Thinking...';
+            chatBox.appendChild(loadingMessageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            try {
+                // IMPORTANT: Replace with your actual Render backend URL
+                const response = await fetch('YOUR_RENDER_BACKEND_URL/api/query', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ question: userMessage })
+                });
+
+                const data = await response.json();
+
+                // Replace the loading message with the bot's response
+                loadingMessageDiv.textContent = data.answer;
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+            } catch (error) {
+                loadingMessageDiv.textContent = 'Sorry, something went wrong.';
+                console.error('Error:', error);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+    </script>
 </body>
 </html>
