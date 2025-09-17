@@ -9,18 +9,63 @@ body {
     background-color: #f0f2f5;
 }
 
-/* Chat container styles (from previous code) */
-.chat-container {
+/* Login container styles */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background: white;
+    padding: 40px 60px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+h1 {
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+p {
+    color: #666;
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+input, button {
+    padding: 10px;
+    margin-top: 10px;
+}
+.log-area {
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    margin-top: 20px;
+    text-align: left;
+    height: 200px;
+    overflow-y: scroll;
+}
+
+/* Main content container (initially hidden) */
+.main-container {
+    display: none; /* Initially hidden */
+    flex-direction: column;
     width: 80%;
-    max-width: 600px;
+    max-width: 1000px;
     background: white;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
     overflow: hidden;
 }
 
+/* Side-by-side layout for portal and chat */
+.developer-portal-section, .chat-interface-section {
+    padding: 20px;
+    flex: 1;
+}
+
+/* Chat container styles */
+.chat-interface-section {
+    display: flex;
+    flex-direction: column;
+}
 .chat-header {
     background-color: #007bff;
     color: white;
@@ -72,77 +117,4 @@ body {
 }
 #send-button:hover {
     background-color: #0056b3;
-}
-
-/* Login/Developer Portal styles */
-.login-container, .developer-container {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    background: white;
-    padding: 40px 60px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-.developer-container {
-    display: none; /* Initially hidden */
-}
-h1 {
-    color: #333;
-    font-size: 2.5em;
-    margin-bottom: 20px;
-}
-p {
-    color: #666;
-    font-size: 1.2em;
-    margin-bottom: 30px;
-}
-input, button {
-    padding: 10px;
-    margin-top: 10px;
-}
-.log-area {
-    background-color: #e9ecef;
-    border: 1px solid #ced4da;
-    padding: 10px;
-    margin-top: 20px;
-    text-align: left;
-    height: 200px;
-    overflow-y: scroll;
-}
-
-/* The new floating developer button */
-.developer-button {
-    position: fixed;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    background-color: #007bff;
-    border-radius: 50%;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 1000;
-}
-.developer-button:hover {
-    width: 200px;
-    border-radius: 30px;
-}
-.developer-button img {
-    filter: invert(100%);
-}
-.developer-button .tooltip {
-    display: none;
-    color: white;
-    font-size: 1em;
-    white-space: nowrap;
-    margin-left: 10px;
-}
-.developer-button:hover .tooltip {
-    display: inline;
 }
