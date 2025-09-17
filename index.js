@@ -13,7 +13,7 @@ const port = process.env.PORT || 3000;
 
 // Middleware setup
 app.use(cors());
-app.use(express.static('public')); // Serve the frontend files
+app.use(express.static('docs')); // Serve the frontend files
 const upload = multer(); // Use multer to handle file uploads
 
 // Connect to MongoDB
