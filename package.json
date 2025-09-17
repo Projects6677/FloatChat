@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
   "start": "node --max-old-space-size=2048 index.js"
-}
+},
   "dependencies": {
     "express": "^4.19.2",
     "mongoose": "^8.4.1",
