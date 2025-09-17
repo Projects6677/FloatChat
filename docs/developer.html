@@ -64,8 +64,11 @@
             log('Uploading and processing file...');
             
             try {
-                // IMPORTANT: Replace with your Render deployed backend URL
-                const response = await fetch(' Failed to send request: Failed to fetch/process-excel', {
+                // IMPORTANT: Replace this placeholder with your actual Render backend URL.
+                // It should look like: 'https://your-app-name.onrender.com'
+                const renderBackendUrl = 'https://float-chat.onrender.com'; // Example URL
+
+                const response = await fetch(`${renderBackendUrl}/process-excel`, {
                     method: 'POST',
                     body: formData,
                 });
