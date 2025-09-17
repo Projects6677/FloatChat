@@ -47,14 +47,28 @@ app.post('/process-excel', upload.single('excelFile'), async (req, res) => {
         const sheetName = workbook.SheetNames[0]; // Get the first sheet
         const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
 
-        // You can now optionally save the data to MongoDB
-        await FloatData.deleteMany({}); // Clear old data
-        await FloatData.insertMany(jsonData); // Insert new data
+        // **NEW: Data Cleaning Step**
+        const cleanedData = jsonData.map(row => {
+            const newRow = { ...row }; // Create a copy of the row
+            // Check for the problematic "--" value and replace it with null
+            if (newRow.temperature === "--") {
+                newRow.temperature = null;
+            }
+            if (newRow.salinity === "--") {
+                newRow.salinity = null;
+            }
+            // Repeat this for any other fields with similar issues
+            return newRow;
+        });
+
+        // Clear old data and insert the new, cleaned data
+        await FloatData.deleteMany({});
+        await FloatData.insertMany(cleanedData);
 
         // Construct the prompt for Groq
         const prompt = `
         You are an expert oceanographer. Analyze the following data from a single day's float observations.
-        Data: ${JSON.stringify(jsonData.slice(0, 10), null, 2)}
+        Data: ${JSON.stringify(cleanedData.slice(0, 10), null, 2)}
         Based on this data, summarize the key findings, including the range of temperature and salinity values.
         `;
 
