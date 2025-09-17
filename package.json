@@ -9,6 +9,10 @@
   "dependencies": {
     "express": "^4.19.2",
     "mongoose": "^8.4.1",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "groq-sdk": "^0.3.3",
+    "multer": "^1.4.5-lts.1",
+    "xlsx": "^0.18.5",
+    "cors": "^2.8.5"
   }
 }
